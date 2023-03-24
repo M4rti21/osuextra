@@ -1,13 +1,13 @@
 <template>
   <div class="data">
-    <div class="userProfile rounded-5 d-flex flex-row m-5 shadow overflow-hidden" style="width: 800px">
-      <img :src="`https://s.ppy.sh/a/` + usrId" alt="pfp" class="object-fit-cover" style="width: 250px; height: 250px"/>
-      <div class="stats pt-3 pb-2 ps-3 pe-4 w-100 d-flex flex-column align-content-between">
+    <div class="userProfile rounded-5 d-flex flex-row m-5 shadow overflow-hidden" style="width: 800px; background-color: #ffffff;">
+      <img :src="`https://osu.ppy.sh/a/` + usrId" alt="pfp" class="object-fit-cover" style="width: 250px; height: 250px"/>
+      <div class="stats pt-3 pb-2 ps-3 pe-4 w-100 d-flex flex-column align-content-between border-start">
         <span class="d-flex flex-row align-items-center justify-content-between">
-          <span class="d-flex align-items-center gap-2">
-            <img :src='"https://flagsapi.com/"+message["country"]+"/flat/64.png"' alt="flag" style="width: 40px; height: 25px" class="rounded object-fit-cover"/>
+          <span class="d-flex flex-row align-items-center gap-2">
+            <img :src='("https://flagcdn.com/h80/"+message["country"]+".png").toLowerCase()' alt="flag" style="width: 44px; height: 30px" class="rounded border object-fit-cover"/>
             <a :href="'https://osu.ppy.sh/users/'+usrId" target="_blank" class="h2 text-decoration-none">{{ message["username"] }}</a></span>
-          <h5>lvl {{ Math.round(message["level"]) }}</h5>
+          <h5>lvl {{ Math.floor(message["level"]) }}</h5>
         </span>
         <hr class="mt-0 mb-2 mx-0">
         <span class="d-flex flex-row align-items-center justify-content-between"><h4>Global Rank:</h4> <h4> #{{ message["pp_rank"] }}</h4></span>

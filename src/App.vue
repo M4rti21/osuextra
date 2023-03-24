@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-row flex-wrap">
+  <div class="d-flex flex-row flex-wrap justify-content-center" id="body">
     <ShowData v-for="uid in userIDs" :usrId="uid"/>
   </div>
 </template>
@@ -17,7 +17,7 @@ import ShowData from "./components/ShowData.vue";
   },
   data() {
     return {
-      userIDs: ['17018032', '17897192', '17671153', '20567165', '15165858', '27067039', '17517577']
+      userIDs: ['17018032', '17897192', '20567165', '27067039', '13241373', '17517577', '17671153', '15165858']
     };
   },
 })
@@ -25,4 +25,10 @@ export default class App extends Vue {
 }
 </script>
 
-<style></style>
+<style>
+#body {
+  background-image: url('assets/bg.jpg');
+  background-size: cover;
+  background-position: center;
+}
+</style>
