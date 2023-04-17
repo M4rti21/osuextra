@@ -1,43 +1,55 @@
 <template>
-  <div class="d-flex flex-column justify-content-center">
-    <IdInput @addedValue="added"/>
-    <div id="user" class="d-flex align-items-center justify-content-center">
-      <UserCard v-if="existsId === true" :usrId="this.uid"/>
+    <div class="d-flex flex-column justify-content-center">
+        <IdInput @addedValue="added"/>
+        <div id="user" class="d-flex align-items-center justify-content-center">
+            <UserCard :usr_data="user_data"/>
+        </div>
+        <div class="spinner-border" role="status" v-if="load">
+            <span class="visually-hidden">Loading...</span>
+        </div>
     </div>
-  </div>
 </template>
 
-<script lang="ts">
+<script>
 import IdInput from "@/components/IdInput.vue";
 import UserCard from "@/components/UserCard.vue";
-export default {
-  name: "RomanNumbers",
-  components: {
-    IdInput,
-    UserCard
-  },
-  data() {
-    return {
-      uid: {
-        type: String,
-        required: true
-      },
-      existsId: {
-        type: Boolean,
-        default: false
-      }
-    }
-  },
-  methods: {
-    added(value:string) {
-      console.log(value);
-      this.uid = value;
-      this.existsId = true;
-    }
-  }
-}
+import axios from "axios";
 
-console.log('hello mum');
+export default {
+    name: "RomanNumbers",
+    components: {
+        IdInput,
+        UserCard
+    },
+    data() {
+        return {
+            user_data: {
+                a: 'a'
+            },
+            fetch_complete: false,
+            load: false,
+        }
+    },
+    methods: {
+        added(value) {
+            this.load = true;
+            axios.get(
+                'https://wysi727.com/osuextrasrv/usrdata.php',
+                {
+                    params: {
+                        usr: value
+                    }
+                }
+            ).then(response => {
+                this.user_data = JSON.parse(response.data);
+                console.log(this.user_data)
+            }).catch(error => {
+                console.error(error);
+            });
+            this.load = false;
+        }
+    }
+}
 
 </script>
 
