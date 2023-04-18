@@ -2,10 +2,10 @@
     <div class="d-flex flex-column justify-content-center">
         <IdInput @addedValue="added"/>
         <div id="user" class="d-flex align-items-center justify-content-center">
-            <UserCard :usr_data="user_data"/>
-        </div>
-        <div class="spinner-border" role="status" v-if="load">
-            <span class="visually-hidden">Loading...</span>
+            <UserCard :usr_data="user_data" :ready="fetch_complete"/>
+            <div class="spinner-border mt-4" role="status" v-if="!fetch_complete && start">
+                <span class="visually-hidden">Loading...</span>
+            </div>
         </div>
     </div>
 </template>
@@ -16,7 +16,7 @@ import UserCard from "@/components/UserCard.vue";
 import axios from "axios";
 
 export default {
-    name: "RomanNumbers",
+    name: "InfoView",
     components: {
         IdInput,
         UserCard
@@ -27,12 +27,13 @@ export default {
                 a: 'a'
             },
             fetch_complete: false,
-            load: false,
+            start: false
         }
     },
     methods: {
         added(value) {
-            this.load = true;
+            this.start = true;
+            this.fetch_complete = false;
             axios.get(
                 'https://wysi727.com/osuextrasrv/usrdata.php',
                 {
@@ -43,10 +44,10 @@ export default {
             ).then(response => {
                 this.user_data = JSON.parse(response.data);
                 console.log(this.user_data)
+                this.fetch_complete = true;
             }).catch(error => {
                 console.error(error);
             });
-            this.load = false;
         }
     }
 }

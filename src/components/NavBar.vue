@@ -2,6 +2,7 @@
   <nav class="d-flex flex-row gap-5 align-items-center justify-content-center">
       <router-link class="nav-item" to="/">Home</router-link>
       <router-link class="nav-item" to="/info">Info</router-link>
+      <router-link class="nav-item" to="/compare">Compare</router-link>
   </nav>
 </template>
 
